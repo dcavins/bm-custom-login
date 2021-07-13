@@ -76,7 +76,25 @@ if ( ! class_exists( 'BMCustomLogin' ) ) {
 		public function custom_login_get_options() {
 
 			if ( empty( $this->options ) ) {
-				$this->options = get_option( CL_OPTIONS );
+				$saved_options = get_option( CL_OPTIONS );
+				// Ensure that the options array is populated with default values.
+				$this->options = wp_parse_args(
+					$saved_options,
+					array(
+						'cl_background'       => '',
+						'cl_color'            => '',
+						'cl_backgroundColor'  => '',
+						'cl_backgroundImage'  => '',
+						'cl_backgroundPX'     => '',
+						'cl_backgroundPY'     => '',
+						'cl_backgroundRepeat' => '',
+						'cl_linkColor'        => '',
+						'cl_colorShadow'      => '',
+						'cl_customCSS'        => '',
+						'cl_powerby'          => '',
+						'cl_footertext'       => '',
+					),
+				);
 			}
 
 			return $this->options;
